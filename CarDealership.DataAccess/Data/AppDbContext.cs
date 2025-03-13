@@ -16,7 +16,8 @@ namespace CarDealership.DataAccess.Data
         }
 
         // add Tables to out Db
-        DbSet<CarMake> CarMakes { get; set; }
+        // must be public DbSets, bc we cannot reference them in our repos if theyre private
+        public DbSet<CarMake> CarMakes { get; set; }
 
         // seed data into our tables
         protected override void OnModelCreating(ModelBuilder modelBuilder)
