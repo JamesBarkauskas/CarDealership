@@ -1,0 +1,67 @@
+﻿@model CarModelVM
+
+<form method="post">
+	<input asp-for="CarModel.Id" hidden />
+
+	<div class="border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">
+				@(Model.CarModel.Id != 0 ? "Update" : "Create") Car Model
+			</h2>
+			<hr />
+		</div>
+		<div class="mb-3 row p-1">
+			<label asp-for="CarModel.Name" class="p-0"></label>
+			<input asp-for="CarModel.Name" class="form-control" />
+			<span asp-validation-for="CarModel.Name" class="text-danger"></span>
+		</div>
+
+		<div class="mb-3 row p-1">
+			<label asp-for="CarModel.Trim" class="p-0"></label>
+			<input asp-for="CarModel.Trim" class="form-control" />
+			<span asp-validation-for="CarModel.Trim" class="text-danger"></span>
+		</div>
+		<div class="mb-3 row p-1">
+			<label asp-for="CarModel.Engine" class="p-0"></label>
+			<input asp-for="CarModel.Engine" class="form-control" />
+			<span asp-validation-for="CarModel.Engine" class="text-danger"></span>
+		</div>
+		<div class="mb-3 row p-1">
+			<label asp-for="CarModel.Description" class="p-0"></label>
+			<textarea asp-for="CarModel.Description" class="form-control"></textarea>
+			<span asp-validation-for="CarModel.Description" class="text-danger"></span>
+		</div>
+
+		<div class="mb-3 row p-1">
+			<label asp-for="CarModel.CarMakeId" class="p-0"></label>
+			<select asp-for="CarModel.CarMakeId" asp-items="@Model.CarMakeList" class="form-select border">
+				<option disabled selected>--Select Car Make--</option>
+			</select>
+			<span asp-validation-for="CarModel.CarMakeId" class="text-danger"></span>
+		</div>
+
+		<div class="row">
+			<div class="col-6 col-md-3">
+				@if (Model.CarModel.Id != 0)
+				{
+					<button type="submit" class="btn btn-primary form-control">Update</button>
+				}
+				else
+				{
+					<button type="submit" class="btn btn-primary form-control">Create</button>
+				}
+			</div>
+			<div class="col-6 col-md-3">
+				<a asp-controller="CarModel" asp-action="Index" class="btn btn-secondary border form-control">
+					Back To List
+				</a>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

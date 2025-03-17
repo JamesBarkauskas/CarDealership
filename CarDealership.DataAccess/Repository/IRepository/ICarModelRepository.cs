@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CarDealership.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace CarDealership.DataAccess.Repository.IRepository
 {
-    public interface IUnitOfWork
+    public interface ICarModelRepository : IRepository<CarModel>
     {
-        ICarMakeRepository CarMake { get; }
-        ICarModelRepository CarModel { get; }
-        void Save();
+
     }
 }

@@ -2,8 +2,9 @@
 using CarDealership.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarDealershipWeb.Controllers
+namespace CarDealershipWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CarMakeController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
@@ -48,7 +49,7 @@ namespace CarDealershipWeb.Controllers
                     _unitOfWork.Save();
                     TempData["success"] = "Car make updated";
                 }
-                
+
                 return RedirectToAction("Index");
             }
             else

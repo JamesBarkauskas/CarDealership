@@ -2,8 +2,9 @@ using System.Diagnostics;
 using CarDealership.Models;
 using Microsoft.AspNetCore.Mvc;
 
-namespace CarDealershipWeb.Controllers
+namespace CarDealershipWeb.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

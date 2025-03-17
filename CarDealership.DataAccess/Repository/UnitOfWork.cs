@@ -12,10 +12,12 @@ namespace CarDealership.DataAccess.Repository
     {
         private AppDbContext _db;
         public ICarMakeRepository CarMake { get; private set; }
+        public ICarModelRepository CarModel { get; private set; }
         public UnitOfWork(AppDbContext db)
         {
             _db = db;
             CarMake = new CarMakeRepository(_db);
+            CarModel = new CarModelRepository(_db);
         }
         
 
