@@ -1,0 +1,103 @@
+﻿@model CarVM
+
+<form method="post" enctype="multipart/form-data">
+	<input asp-for="Car.Id" hidden />
+	<input asp-for="Car.ImageUrl" hidden />
+
+	<div class="row border p-3 mt-4">
+		<div class="row pb-2">
+			<h2 class="text-primary">
+				@(@Model.Car.Id != 0 ? "Update" : "Create") Car
+			</h2>
+			<hr />
+		</div>
+
+		<div class="col-8">
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.CarModelId" class="p-0"></label>
+				<select asp-for="Car.CarModelId" asp-items="@Model.CarModelList" class="form-select border">
+					<option disabled selected>--Select Car Model--</option>
+				</select>
+				<span asp-validation-for="Car.CarModelId" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.MSRP" class="p-0"></label>
+				<input asp-for="Car.MSRP" class="form-control" />
+				<span asp-validation-for="Car.MSRP" class="text-danger"></span>
+			</div>
+
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.OurPrice" class="p-0"></label>
+				<input asp-for="Car.OurPrice" class="form-control" />
+				<span asp-validation-for="Car.OurPrice" class="text-danger"></span>
+			</div>
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.StockNumber" class="p-0"></label>
+				<input asp-for="Car.StockNumber" class="form-control" />
+				<span asp-validation-for="Car.StockNumber" class="text-danger"></span>
+			</div>
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.VIN" class="p-0"></label>
+				<input asp-for="Car.VIN" class="form-control" />
+				<span asp-validation-for="Car.VIN" class="text-danger"></span>
+			</div>
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.Year" class="p-0"></label>
+				<input asp-for="Car.Year" class="form-control" />
+				<span asp-validation-for="Car.Year" class="text-danger"></span>
+			</div>
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.Color" class="p-0"></label>
+				<input asp-for="Car.Color" class="form-control" />
+				<span asp-validation-for="Car.Color" class="text-danger"></span>
+			</div>
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.Miles" class="p-0"></label>
+				<input asp-for="Car.Miles" class="form-control" />
+				<span asp-validation-for="Car.Miles" class="text-danger"></span>
+			</div>
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.Drivetrain" class="p-0"></label>
+				<input asp-for="Car.Drivetrain" class="form-control" />
+				<span asp-validation-for="Car.Drivetrain" class="text-danger"></span>
+			</div>
+			<div class="mb-3 row p-1">
+				<label asp-for="Car.ImageUrl" class="p-0"></label>
+				<input type="file" name="file" class="form-control" />
+				<span asp-validation-for="Car.ImageUrl" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="col-4">
+			<img src="@Model.Car.ImageUrl" width="100%" style="border-radius:5px; border:1px solid" />
+		</div>
+
+
+
+
+
+		<div class="row">
+			<div class="col-6 col-md-3">
+				@if (Model.Car.Id != 0)
+				{
+					<button type="submit" class="btn btn-primary form-control">Update</button>
+				}
+				else
+				{
+					<button type="submit" class="btn btn-primary form-control">Create</button>
+				}
+			</div>
+			<div class="col-6 col-md-3">
+				<a asp-controller="Car" asp-action="Index" class="btn btn-secondary border form-control">
+					Back To List
+				</a>
+			</div>
+		</div>
+	</div>
+</form>
+
+@section Scripts {
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

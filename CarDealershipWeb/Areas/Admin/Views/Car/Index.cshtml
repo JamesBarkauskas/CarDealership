@@ -1,0 +1,55 @@
+﻿@model List<Car>
+
+<div container>
+	<div class="row pt-4 pb-3">
+		<div class="col-6">
+			<h2 class="text-primary">
+				Cars
+			</h2>
+		</div>
+		<div class="col-6 text-end">
+			<a asp-controller="Car" asp-action="Upsert" class="btn btn-primary">
+				<i class="bi bi-plus-circle"></i> Add New Car To Inventory
+			</a>
+		</div>
+	</div>
+
+	<table class="table table-bordered table-striped">
+		<thead>
+			<tr>
+				<th>Model and Trim</th>
+				<th>MSRP</th>
+				<th>Our Price</th>
+				<th>Drivetrain</th>
+				<th>Stock Number</th>
+				<th></th>
+			</tr>
+		</thead>
+
+		<tbody>
+			@foreach (var obj in Model)
+			{
+				<tr>
+					<td>
+						@obj.CarModel.Name @obj.CarModel.Trim
+					</td>
+					<td>@obj.MSRP.ToString("c")</td>
+					<td>@obj.OurPrice.ToString("c")</td>
+					<td>@obj.Drivetrain</td>
+					<td>@obj.StockNumber</td>
+					<td>
+						<div class="w-75 btn-group">
+							<a asp-controller="Car" asp-action="Upsert" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+								<i class="bi bi-pencil-square"></i> Edit
+							</a>
+							<a asp-controller="Car" asp-action="Delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+								<i class="bi bi-trash-fill"></i> Delete
+							</a>
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+</div>
+
