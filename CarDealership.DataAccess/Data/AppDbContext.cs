@@ -18,6 +18,7 @@ namespace CarDealership.DataAccess.Data
         public DbSet<CarMake> CarMakes { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Service> Services { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -78,6 +79,11 @@ namespace CarDealership.DataAccess.Data
                     Miles = 2,
                     Drivetrain = "FWD"
                 }
+                );
+
+            modelBuilder.Entity<Service>().HasData(
+                new Service { Id = 1, NameOfService = "Oil Change", Price = 69.99 },
+                new Service { Id = 2, NameOfService = "Tire Rotation", Price = 39.99 }
                 );
 
         }

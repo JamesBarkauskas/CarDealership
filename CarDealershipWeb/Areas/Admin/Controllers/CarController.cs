@@ -126,9 +126,13 @@ namespace CarDealershipWeb.Areas.Admin.Controllers
             else
             {
                 // must remove the img too..
-                var oldImgPath =
-                    Path.Combine(_webHostEnvironment.WebRootPath, carVM.Car.ImageUrl.TrimStart('\\'));
-                if (System.IO.File.Exists(oldImgPath)) { System.IO.File.Delete(oldImgPath); }
+                // check if Car obj has an img, then remove img, otherwise skip and jsut remove car...
+                if (!string.IsNullOrEmpty(carVM.Car.ImageUrl))
+                {
+                    var oldImagePath =
+                        Path.Combine(_webHostEnvironment.WebRootPath, carVM.Car.ImageUrl.TrimStart('\\'));
+                    if (System.IO.File.Exists(oldImagePath)) { System.IO.File.Delete(oldImagePath); }
+                }
 
                 _unitOfWork.Car.Remove(carVM.Car);
                 _unitOfWork.Save();
