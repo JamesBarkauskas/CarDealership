@@ -1,0 +1,34 @@
+﻿@model List<Service>
+
+<div class="row pb-3">
+	@foreach (var service in Model)
+	{
+		<div class="col-lg-3 col-sm-6">
+			<div class="row p-2">
+				<div class="col-12 p-1">
+					<div class="card border-0 p-3 shadow border-top border-5 rounded">
+						<div class="card-body pb-0">
+							<div class="pl-1">
+								<p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@service.NameOfService</p>
+							</div>
+							<div class="pl-1">
+								<p class="text-dark text-opacity-75 text-center mb-0">Price: @service.Price.ToString("c")</p>
+							</div>
+							<div class="pl-1">
+								<p class="text-dark text-opacity-75 text-center">@service.Description </p>
+							</div>
+						</div>
+
+						<div>
+							<a asp-area="Customer" asp-controller="ServiceCustomer" asp-action="Schedule"
+							   asp-route-serviceId="@service.Id" class="btn btn-outline-primary bg-gradient border-0">
+								Schedule Service
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+

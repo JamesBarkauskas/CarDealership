@@ -1,0 +1,48 @@
+﻿@model Car
+
+<div class="card shadow border-0 mt-4 mb-4">
+	<div class="card-header bg-secondary bg-gradient text-light py-4">
+		<div class="row">
+			<div class="col-12 text-center">
+				<h3 class="text-dark">@Model.CarModel.Name @Model.CarModel.Trim</h3>
+				<p>@Model.Drivetrain</p>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="card-body">
+		<div class="py-3">
+			<div class="row">
+				<div class="col-6 col-md-2 offset-lg-1 pb-1">
+					<a asp-action="Index" class="btn btn-outline-primary bg-gradient mb-5 fw-semibold btn-sm">
+						Back To Cars
+					</a>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-12 col-lg-3 offset-lg-1 text-center mb-3">
+					<img src="@Model.ImageUrl" width="100%" class="rounded" />
+				</div>
+				<div class="col-12 col-lg-6 offset-lg-1">
+					<div class="col-12 col-md-6 pb-4">
+						<p>@Model.Drivetrain</p>
+					</div>
+					<div class="row ps-2">
+						<h6 class="text-dark pb-2">
+							MSRP:
+							<span class="text-decoration-line-through">
+								@Model.MSRP.ToString("c")
+							</span>
+						</h6>
+						<h6 class="text-dark">
+							Our Price:
+							@Model.OurPrice.ToString("c")
+						</h6>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

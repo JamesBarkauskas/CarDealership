@@ -1,0 +1,35 @@
+﻿@model List<Car>
+
+<div class="row pb-3">
+	@foreach (var car in Model)
+	{
+		<div class="col-lg-3 col-sm-6">
+			<div class="row p-2">
+				<div class="col-12 p-1">
+					<div class="card border-0 p-3 shadow border-top border-5 rounded">
+						<img src="@car.ImageUrl" class="card-img-top rounded" />
+						<div class="card-body pb-0">
+							<div class="pl-1">
+								<p class="card-title h5 text-dark opacity-75 text-uppercase text-center">@car.CarModel.Name @car.CarModel.Trim</p>
+								<p class="card-title text-dark text-center"><b>@car.Drivetrain</b></p>
+							</div>
+							<div class="pl-1">
+								<p class="text-dark text-opacity-75 text-center mb-0">MSRP: <span class="text-decoration-line-through">@car.MSRP.ToString("c")</span></p>
+							</div>
+							<div class="pl-1">
+								<p class="text-dark text-opacity-75 text-center">Our Price: <span>@car.OurPrice.ToString("c")</span>
+							</div>
+						</div>
+
+						<div>
+							<a asp-area="Customer" asp-controller="NewCar" asp-action="Details"
+							   asp-route-id="@car.Id" class="btn btn-outline-primary bg-gradient border-0">
+								Details
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>

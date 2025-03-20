@@ -1,6 +1,18 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿
+<div class="row">
+    <h2>Welcome to dealership</h2>
+</div>
+<div class="row">
+    <div class="col-6">
+        <a asp-area="customer" asp-controller="NewCar" asp-action="Index" class="btn btn-primary">New Cars</a>
+    </div>
+    <div class="col-6">
+        <a asp-area="customer" asp-controller="UsedCar" asp-action="Index" class="btn btn-primary">Used Cars</a>
+    </div>
+</div>
+<div class="row">
+    <a asp-area="Customer" asp-controller="ServiceCustomer" asp-action="Index" class="btn btn-primary">Services</a>
+</div>
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
