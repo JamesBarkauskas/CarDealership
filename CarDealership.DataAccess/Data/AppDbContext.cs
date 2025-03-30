@@ -21,6 +21,7 @@ namespace CarDealership.DataAccess.Data
         public DbSet<CarModel> CarModels { get; set; }
         public DbSet<Car> Cars { get; set; }
         public DbSet<Service> Services { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

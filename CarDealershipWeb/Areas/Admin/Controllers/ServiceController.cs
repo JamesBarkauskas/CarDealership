@@ -1,10 +1,13 @@
 ﻿using CarDealership.DataAccess.Repository.IRepository;
 using CarDealership.Models;
+using CarDealership.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CarDealershipWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Role_Admin)]
     public class ServiceController : Controller
     {
         private readonly IUnitOfWork _unitOfWork;
