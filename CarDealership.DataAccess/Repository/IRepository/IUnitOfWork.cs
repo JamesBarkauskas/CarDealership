@@ -12,6 +12,8 @@ namespace CarDealership.DataAccess.Repository.IRepository
         ICarModelRepository CarModel { get; }
         ICarRepository Car { get; }
         IServiceRepository Service { get; }
+        IShoppingCartRepository ShoppingCart { get; }
+        IApplicationUserRepository ApplicationUser { get; }
         void Save();
     }
 }

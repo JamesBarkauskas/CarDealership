@@ -25,9 +25,114 @@
 			</tr>
 		</thead>
 
+		@* <select class="form-select border">
+							<option disabled selected>View Trims</option>
+							@foreach(var obj in @Model.Where(u=>u.Name==@name))
+							{
+								<option disabled>@obj.Name @obj.Trim</option>
+							}
+
+						</select> *@
+		@* <select class="form-select border"
+							asp-items="@Model.Where(u=>u.Name==@name).Select(u=> new
+							SelectListItem {
+							Text=u.Name + " " + u.Trim,
+							Value = u.Id.ToString()
+							})">
+							<option disabled selected>View Trims</option> 
+						</select> *@
+@* 
+		@{
+			List<string> carModelNames = new List<string>();
+		}
+		@foreach(var obj in Model)
+		{
+			@if (!carModelNames.Contains(obj.Name))
+			{
+				carModelNames.Add(obj.Name);
+			}
+		}
+
+		<tbody>
+			@foreach (var name in carModelNames.Order())
+			{
+				<tr>
+					<td>@name</td>
+					<td>
+						<div class="dropdown">
+							<button class="form-control border" type="button" data-bs-toggle="dropdown">
+								View Trims  <i class="bi bi-caret-down"></i>
+							</button>
+							<ul class="dropdown-menu">
+								@foreach (var obj in @Model.Where(u => u.Name == @name)) {
+									<li class="dropdown-item">@obj.Name @obj.Trim</li>
+								}
+							</ul>
+						</div>
+						
+					</td>
+					<td>
+
+					</td>
+					<td>
+
+					</td>
+					<td class="w-25">
+						<div class="w-100 btn-group">
+							<div class="dropdown">
+								<button class="btn btn-primary form-control border" type="button" data-bs-toggle="dropdown">
+									<i class="bi bi-pencil-square"></i> Edit
+								</button>
+								
+								<ul class="dropdown-menu">
+									@foreach (var obj in @Model.Where(u => u.Name == @name))
+									{
+										<a asp-controller="CarModel" asp-action="Upsert" asp-route-id="@obj.Id" class="form-control borrder">
+											<li class="dropdown-item">@obj.Name @obj.Trim</li>
+										</a>
+										
+									}
+								</ul>
+							</div>
+							<div class="dropdown">
+								<button class="btn btn-danger form-control border" type="button" data-bs-toggle="dropdown">
+									<i class="bi bi-trash-fill"></i> Delete
+								</button>
+
+								<ul class="dropdown-menu">
+									@foreach (var obj in @Model.Where(u => u.Name == @name))
+									{
+										<a asp-controller="CarModel" asp-action="Delete" asp-route-id="@obj.Id">
+											<li class="dropdown-item">@obj.Name @obj.Trim</li>
+										</a>
+									}
+								</ul>
+							</div>
+							
+						</div>
+					</td>
+				</tr>
+			}
+		</tbody> *@
+
+		@* CarMakeList = _unitOfWork.CarMake.GetAll().Select(u => new SelectListItem
+		{
+		Text = u.Name,
+		Value = u.Id.ToString()
+		}) *@
+
+		@* <div class="mb-3 row p-1">
+			<label asp-for="CarModel.CarMakeId" class="p-0"></label>
+			<select asp-for="CarModel.CarMakeId" asp-items="@Model.CarMakeList" class="form-select border">
+				<option disabled selected>--Select Car Make--</option>
+			</select>
+			<span asp-validation-for="CarModel.CarMakeId" class="text-danger"></span>
+		</div> *@
+
 		<tbody>
 			@foreach (var obj in Model.OrderBy(u=>u.Name))
 			{
+				
 				<tr>
 					<td>
 						@obj.Name
@@ -50,5 +155,3 @@
 		</tbody>
 	</table>
 </div>
-
-

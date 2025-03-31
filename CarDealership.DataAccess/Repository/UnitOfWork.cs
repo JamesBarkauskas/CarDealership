@@ -15,6 +15,8 @@ namespace CarDealership.DataAccess.Repository
         public ICarModelRepository CarModel { get; private set; }
         public ICarRepository Car { get; private set; }
         public IServiceRepository Service { get; private set; }
+        public IShoppingCartRepository ShoppingCart { get; private set; }
+        public IApplicationUserRepository ApplicationUser { get; private set; }
         public UnitOfWork(AppDbContext db)
         {
             _db = db;
@@ -22,6 +24,8 @@ namespace CarDealership.DataAccess.Repository
             CarModel = new CarModelRepository(_db);
             Car = new CarRepository(_db);
             Service = new ServiceRepository(_db);
+            ShoppingCart = new ShoppingCartRepository(_db);
+            ApplicationUser = new ApplicationUserRepository(_db);
         }
         
 

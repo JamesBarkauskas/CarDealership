@@ -20,8 +20,8 @@ namespace CarDealership.Models
 
         public string AppUserId { get; set; }
 
-        //[ForeignKey("AppUserId")]
-        //[ValidateNever]
-        //public ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey("AppUserId")]
+        [ValidateNever]
+        public ApplicationUser ApplicationUser { get; set; }
     }
 }
