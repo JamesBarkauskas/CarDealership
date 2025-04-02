@@ -1,4 +1,5 @@
 ﻿using CarDealership.DataAccess.Repository.IRepository;
+using CarDealership.Models;
 using CarDealership.Models.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -60,8 +61,61 @@ namespace CarDealershipWeb.Areas.Customer.Controllers
             {
                 ShoppingCartVM.OrderHeader.OrderTotal += cart.Service.Price;
             }
-
+             
             return View(ShoppingCartVM);
+        }
+
+        [HttpPost]
+        [ActionName("Summary")]
+        public IActionResult SummaryPOST()
+        {
+            var claimsIdentity = (ClaimsIdentity)User.Identity;
+            var userId = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            ShoppingCartVM.ShoppingCartList = _unitOfWork.ShoppingCart.GetAll(u=>u.AppUserId == userId, 
+                includeProperties:"Service");
+            ShoppingCartVM.OrderHeader.OrderDate = DateTime.Now;
+            ShoppingCartVM.OrderHeader.ApplicationUserId = userId;
+
+            // grab the appUser by doing this..
+            ApplicationUser applicationUser = _unitOfWork.ApplicationUser.Get(u=>u.Id==userId);
+
+            // calculate total
+            foreach (var cart in  ShoppingCartVM.ShoppingCartList)
+            {
+                ShoppingCartVM.OrderHeader.OrderTotal += cart.Service.Price;
+            }
+
+            // add our OrderHeader to db..
+            _unitOfWork.OrderHeader.Add(ShoppingCartVM.OrderHeader);
+            _unitOfWork.Save();
+
+            // create OrderDetail for each service in cart..
+            foreach(var cart in ShoppingCartVM.ShoppingCartList)
+            {
+                OrderDetail orderDetail = new()
+                {
+                    ServiceId = cart.ServiceId,
+                    OrderHeaderId = ShoppingCartVM.OrderHeader.Id,
+                    Price = cart.Service.Price
+                };
+                _unitOfWork.OrderDetail.Add(orderDetail);
+                _unitOfWork.Save();
+            }
+
+            return RedirectToAction(nameof(ServiceConfirmation), new {id=ShoppingCartVM.OrderHeader.Id});
+        }
+
+        // after scheduling service, get sent to confirmation page..
+        public IActionResult ServiceConfirmation(int id)
+        {
+            OrderHeader orderHeader = _unitOfWork.OrderHeader.Get(u => u.Id == id, includeProperties:"ApplicationUser");
+
+            // empty the user's shoppingcart after placing order
+            List<ShoppingCart> carts = _unitOfWork.ShoppingCart.GetAll(u => u.AppUserId == orderHeader.ApplicationUserId).ToList();
+            _unitOfWork.ShoppingCart.RemoveRange(carts);
+            _unitOfWork.Save();
+            return View(id);
         }
 
         public IActionResult Remove(int cartId)
