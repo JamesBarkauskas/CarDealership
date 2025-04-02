@@ -23,5 +23,9 @@ namespace CarDealership.Models
         [ForeignKey("AppUserId")]
         [ValidateNever]
         public ApplicationUser ApplicationUser { get; set; }
+
+        // create Price property to display in our cart UI, but NotMapped will have it not create a column in db.
+        [NotMapped]
+        public double Price { get; set; }
     }
 }
