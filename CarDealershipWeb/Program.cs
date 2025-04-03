@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using CarDealership.Utility;
+using System.Security.Claims;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,10 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 
 //builder.Services.AddDefaultIdentity<IdentityUser>().AddEntityFrameworkStores<AppDbContext>();
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>().AddDefaultTokenProviders();
-
+//builder.Services.Configure<IdentityOptions>(options =>
+//{
+//    options.ClaimsIdentity.RoleClaimType = ClaimTypes.Role;
+//});
 // add this for sending users to our AccessDenied page when trying to access unauthorized page...
 builder.Services.ConfigureApplicationCookie(options =>
 {
